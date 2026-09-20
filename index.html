@@ -6,39 +6,39 @@
 <title>Mi Libro Fonético - Grafismos con Sonido</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  *{box-sizing:border-box;margin:0;paddingyl:0;-webkit-tap-highlight-color:transparent}
   html{font-size:16px}
   body{font-family:'Nunito',sans-serif;background:#FFFBF0;color:#1e293b;min-height:100vh;min-height:100dvh;overflow-x:hidden}
-.hand{font-family:'Caveat',cursive}
-.patrick{font-family:'Patrick Hand',cursive}
-.topbar{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.topbar-left{display:flex;align-items:center;gap:10px}
-.logo{width:36px;height:36px;min-width:36px;border-radius:10px;background:#0f172a;display:grid;place-items:center;color:white;font-weight:900;font-size:14px}
-.book{max-width:1100px;margin:8px auto 20px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #fde68a;width:calc(100% - 16px)}
+  .hand{font-family:'Caveat',cursive}
+  .patrick{font-family:'Patrick Hand',cursive}
+  .topbar{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .topbar-left-grid{display:flex;align-items:{center;gap:10px}
+  .logo{width:display36px;height:36px;min-width:36px:;border-radius:10px;background:#0fgrid172a;display:grid;place-items:center;color:white;font-weight:900;font-size:14px}
+  .book{max-width:1100px;margin:8px auto 20px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #fde68a;width:calc(100% - 16px)}
   @media(min-width:768px){.book{border-radius:32px;width:calc(100% - 32px);margin:12px auto 24px}}
-.page{min-height:calc(100dvh - 140px);padding:16px;display:flex;flex-direction:column}
+  .page{min-height:calc(100dvh - 140px);padding:16px;display:flex;flex-direction:column}
   @media(min-width:768px){.page{min-height:620px;padding:24px}}
-.syl-card{cursor:pointer;transition:.15s;background:white;border:2px solid #fef3c7;border-radius:16px;padding:10px 6px;text-align:center;user-select:none}
+  .syl-card{cursor:pointer;transition:.15s;background:white;border:2px solid #fef3c7;border-radius:16px;padding:10px 6px;text-align:center;user-select:none}
   @media(min-width:768px){.syl-card{border-radius:24px;padding:12px 8px}}
-.syl-card:active{transform:scale(.96)}
-.syl-card.active{border-color:#0f172a;background:#fffbeb;transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,.12)}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-top:1px solid #fde68a;background:white;gap:8px;position:sticky;bottom:0;z-index:10}
+  .syl-card:active{transform:scale(.96)}
+  .syl-card.active{border-color:#0f172a;background:#fffbeb;transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,.12)}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-top:1px solid #fde68a;background:white;gap:8px;position:sticky;bottom:0;z-index:10}
   @media(min-width:768px){.nav{padding:16px 24px}}
-.btn{height:44px;padding:0 18px;border-radius:999px;border:1px solid #fde68a;font-weight:900;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;background:white;white-space:nowrap;flex-shrink:0}
+  .btn{height:44px;padding:0 18px;border-radius:999px;border:1px solid #fde68a;font-weight:900;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;background:white;white-space:nowrap;flex-shrink:0}
   @media(min-width:768px){.btn{height:48px;padding:0 24px}}
-.btn-black{background:#0f172a;color:white;border-color:#0f172a}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-.btn:active{transform:scale(.97)}
-.two-col{display:grid;grid-template-columns:1fr;gap:16px}
-  @media(min-width:900px){.two-col{grid-template-columns:1.25fr.75fr;gap:24px}}
-.syl-grid{display:grid;gap:10px}
-.emoji-box{background:#FFFBF0;border:1px solid #fde68a;border-radius:20px;padding:16px;text-align:center;display:grid;place-items:center}
+  .btn-black{background:#0f172a;color:white;border-color:#0f172a}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn:active{transform:scale(.97)}
+  .two-col{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:900px){.two-col{grid-template-columns:1.25fr .75fr;gap:24px}}
+  .s;gap:10px}
+  .emoji-box{background:#FFFBF0;border:1px solid #fde68a;border-radius:20px;padding:16px;text-align:center;display:grid;place-items:center}
   @media(min-width:900px){.emoji-box{border-radius:32px;padding:20px;min-height:380px}}
-.frases-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  .frases-grid{display:grid;grid-template-columns:1fr;gap:12px}
   @media(min-width:600px){.frases-grid{grid-template-columns:1fr 1fr}}
-.cover-title{font-size:36px;line-height:.9;font-weight:900}
+  .cover-title{font-size:36px;line-height:.9;font-weight:900}
   @media(min-width:768px){.cover-title{font-size:64px}}
-.cover-hand{font-size:42px}
+  .cover-hand{font-size:42px}
   @media(min-width:768px){.cover-hand{font-size:72px}}
   svg{max-width:100%;height:auto}
 </style>
@@ -73,7 +73,7 @@
 </div>
 
 <script>
-const WORDS=[
+const WORDS = [
   {s:["ma","pa"], full:"mapa", emoji:"🗺️", colors:["#FF5A5F","#FF9A2E"], top:["arc","triangle"], bottom:["dot","dot"], hint:"busco lugares"},
   {s:["bi","ci","cle","ta"], full:"bicicleta", emoji:"🚲", colors:["#FF5A5F","#FF9A2E","#FFD23F","#4ECDC4"], top:["arc","triangle","rect","wave"], bottom:["dot","smallArc","line","dot"]},
   {s:["a","ma","ri","llo"], full:"amarillo", emoji:"💛", colors:["#FF5A5F","#FF9A2E","#FFD23F","#4ECDC4"], top:["bump","arc","triangle","rect"], bottom:["dot","dot","smallArc","line"]},
@@ -83,99 +83,162 @@ const WORDS=[
   {s:["li","mo","na","da"], full:"limonada", emoji:"🍋", colors:["#FFD23F","#7ED957","#FF9A2E","#4ECDC4"], top:["arc","bump","triangle","rect"], bottom:["smallArc","dot","dot","dash"]},
   {s:["man","da","ri","na"], full:"mandarina", emoji:"🍊", colors:["#FF9A2E","#FFD23F","#FF5A5F","#7ED957"], top:["double","arc","wave","triangle"], bottom:["square","dot","line","dot"]},
   {s:["ham","bur","gue","sa"], full:"hamburguesa", emoji:"🍔", colors:["#D4A373","#FF9A2E","#FF5A5F","#FFD23F"], top:["rect","bump","arc","wave"], bottom:["line","smallArc","dot","dot"]},
-  {s:["le","che","blan","ca"], full:"leche blanca", emoji:"🥛", colors:["#6BCBFF","#A78BFA","#fff","#FFD23F"], top:["arc","triangle","rect","bump"], bottom:["dot","dot","dash","smallArc"]},
+  {s:["le","che","blan","ca"], full:"leche blanca", emoji:"🥛", colors:["#6BCBFF","#A78BFA","#e2e8f0","#FFD23F"], top:["arc","triangle","rect","bump"], bottom:["dot","dot","dash","smallArc"]},
   {s:["ju","go","dul","ce"], full:"jugo dulce", emoji:"🧃", colors:["#FF5A5F","#7ED957","#FFD23F","#4ECDC4"], top:["wave","arc","triangle","double"], bottom:["dot","line","dot","dot"]},
   {s:["ca","ra","col"], full:"caracol", emoji:"🐌", colors:["#A78BFA","#4ECDC4","#FF9A2E"], top:["bump","arc","triangle"], bottom:["smallArc","dot","square"]},
-  {s:["o","ve","ja"], full:"oveja", emoji:"🐑", colors:["#fff","#7ED957","#FFD23F"], top:["rect","wave","arc"], bottom:["dash","dot","dot"]},
+  {s:["o","ve","ja"], full:"oveja", emoji:"🐑", colors:["#e2e8f0","#7ED957","#FFD23F"], top:["rect","wave","arc"], bottom:["dash","dot","dot"]},
   {s:["man","za","na"], full:"manzana", emoji:"🍎", colors:["#FF5A5F","#FFD23F","#7ED957"], top:["arc","double","triangle"], bottom:["dot","smallArc","dot"]},
   {s:["no","che","nu","be"], full:"noche nube", emoji:"🌙", colors:["#6BCBFF","#A78BFA","#4ECDC4","#CBD5E1"], top:["double","arc","wave","bump"], bottom:["square","dot","line","dot"]},
 ];
 
-let page=0;
-let active=null;
-const total=18;
+let page = 0;
+let active = null;
+const total = 18;
 let vozActiva = true;
+
 const synth = window.speechSynthesis;
 let voces = [];
+let vozElegida = null;
+
+/* ---------- SELECCIÓN DE VOZ NATURAL ---------- */
 
 function cargarVoces(){
-  voces = synth.getVoices();
-}
-if(synth){
-  cargarVoces();
-  if(speechSynthesis.onvoiceschanged!== undefined){
-    speechSynthesis.onvoiceschanged = cargarVoces;
+  if(!synth) return;
+  voces = synth.getVoices() || [];
+  if(voces.length && !vozElegida){
+    vozElegida = elegirMejorVoz(voces);
   }
 }
 
-function hablar(texto){
-  if(!vozActiva ||!synth) return;
-  synth.cancel();
-  const u = new SpeechSynthesisUtterance(texto);
-  const vozEs = voces.find(v => v.lang.includes('es-MX')) || voces.find(v => v.lang.includes('es-')) || null;
-  if(vozEs) u.voice = vozEs;
-  u.lang = 'es-MX';
-  u.rate = 0.85;
-  u.pitch = 1.05;
-  u.volume = 1;
+function elegirMejorVoz(lista){
+  const es = lista.filter(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  if(!es.length) return null;
+
+  // Prioridades: voces neuronales / naturales primero
+  const prioridades = [
+    v => /google/i.test(v.name) && /es[-_]?mx/i.test(v.lang),
+    v => /google/i.test(v.name) && /es[-_]?us/i.test(v.lang),
+    v => /google/i.test(v.name) && /es/i.test(v.lang),
+    v => /(natural|neural|enhanced|premium)/i.test(v.name) && /es/i.test(v.lang),
+    v => /microsoft/i.test(v.name) && /es[-_]?mx/i.test(v.lang),
+    v => /microsoft/i.test(v.name) && /es/i.test(v.lang),
+    v => v.lang.toLowerCase() === 'es-mx',
+    v => v.lang.toLowerCase() === 'es-us',
+    v => v.lang.toLowerCase().startsWith('es-'),
+  ];
+  for(const p of prioridades){
+    const f = es.find(p);
+    if(f) return f;
+  }
+  return es[0];
+}
+
+if(synth){
+  cargarVoces();
+  if('onvoiceschanged' in synth){
+    synth.onvoiceschanged = cargarVoces;
+  }
+  // Fallback: en iOS/Android las voces a veces tardan
+  setTimeout(cargarVoces, 300);
+  setTimeout(cargarVoces, 1200);
+}
+
+/* ---------- HABLAR CON VOZ NATURAL ---------- */
+
+function hablar(texto, opciones = {}){
+  if(!vozActiva || !synth || !texto) return;
+
+  // En móvil las voces pueden no estar listas aún
+  if(!voces.length) cargarVoces();
+  if(!vozElegida && voces.length) vozElegida = elegirMejorVoz(voces);
+
+  try { synth.cancel(); } catch(_) {}
+
+  const u = new SpeechSynthesisUtter '';
+ance(texto);
+  if(vozElegida) u.voice = vozElegida;
+  u.lang = (vozElegida && vozElegida.lang) || 'es-MX';
+
+  // Ajustes más naturales:
+  // - rate 0.9 = claro pero no robótico
+  // - pitch 1.0 = voz natural sin exagerar
+  u.rate   = opciones.rate   ?? 0.9;
+  u.pitch  = opciones.pitch  ?? 1.0;
+  u.volume = opciones.volume ?? 1;
+
   synth.speak(u);
 }
 
+/* ---------- SONIDO ON/OFF ---------- */
+
 function toggleSonido(){
-  vozActiva =!vozActiva;
+  vozActiva = !vozActiva;
   const btn = document.getElementById('soundBtn');
-  btn.innerText = vozActiva? '🔊 Sonido ON' : '🔇 Sonido OFF';
-  btn.style.background = vozActiva? '#0f172a' : 'white';
-  btn.style.color = vozActiva? 'white' : '#0f172a';
-  if(vozActiva) hablar('Sonido activado');
-  else synth.cancel();
+  btn.innerText = vozActiva ? '🔊 Sonido ON' : '🔇 Sonido OFF';
+  btn.style.background = vozActiva ? '#0f172a' : 'white';
+  btn.style.color = vozActiva ? 'white' : '#0f172a';
+  if(vozActiva){
+    // Aprovechamos el gesto del usuario para desbloquear voces en móvil
+    cargarVoces();
+    hablar('Sonido activado');
+  } else if(synth){
+    try { synth.cancel(); } catch(_) {}
+  }
 }
 
-function topSvg(type,color,act){
-  const sw=act?5:3.2;
-  const glow=act?` style="filter:drop-shadow(0 0 6px ${color})"`:'';
-  if(type==="arc") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 20 Q35 -2 64 20" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
-  if(type==="triangle") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M35 2 L60 20 L10 20 Z" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
-  if(type==="rect") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><rect x="8" y="6" width="54" height="12" rx="6" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
-  if(type==="wave") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 14 Q18 4 30 14 T54 14" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
-  if(type==="bump") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 18 Q20 2 35 18 Q50 2 64 18" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
-  if(type==="double") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 16 Q18 6 30 16 M38 16 Q50 6 62 16" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
+/* ---------- SVG  DE GRAFISMOS ---------- */
+
+function topSvg(type, color, act){
+  const sw = act ? 5 : 3.2;
+  const glow = act ? ` style="filter:drop-shadow(0 0 6px ${color})"` : if(type === "arc")      return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 20 Q35 -2 64 20" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
+  if(type === "triangle") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M35 2 L60 20 L10 20 Z" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
+  if(type === "rect")     return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><rect x="8" y="6" width="54" height="12" rx="6" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
+  if(type === "wave")     return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 14 Q18 4 30 14 T54 14" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
+  if(type === "bump")     return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 18 Q20 2 35 18 Q50 2 64 18" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
+  if(type === "double")   return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 16 Q18 6 30 16 M38 16 Q50 6 62 16" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
   return "";
 }
-function bottomSvg(type,color,act){
-  const r=act?7:5.5;
-  if(type==="dot") return `<svg width="62" height="18" viewBox="0 0 70 20"><circle cx="35" cy="10" r="${r}" fill="${color}"/></svg>`;
-  if(type==="smallArc") return `<svg width="62" height="18" viewBox="0 0 70 20"><path d="M18 6 Q35 18 52 6" stroke="${color}" stroke-width="3" fill="none"/></svg>`;
-  if(type==="line") return `<svg width="62" height="18" viewBox="0 0 70 20"><rect x="12" y="8" width="46" height="4" rx="2" fill="${color}"/></svg>`;
-  if(type==="triDown") return `<svg width="62" height="18" viewBox="0 0 70 20"><path d="M35 16 L20 4 L50 4 Z" fill="${color}"/></svg>`;
-  if(type==="square") return `<svg width="62" height="18" viewBox="0 0 70 20"><rect x="25" y="4" width="20" height="12" rx="3" fill="${color}"/></svg>`;
-  if(type==="dash") return `<svg width="62" height="18" viewBox="0 0 70 20"><circle cx="20" cy="10" r="3" fill="${color}"/><circle cx="35" cy="10" r="3" fill="${color}"/><circle cx="50" cy="10" r="3" fill="${color}"/></svg>`;
+
+function bottomSvg(type, color, act){
+  const r = act ? 7 : 5.5;
+  if(type === "dot")      return `<svg width="62" height="18" viewBox="0 0 70 20"><circle cx="35" cy="10" r="${r}" fill="${color}"/></svg>`;
+  if(type === "smallArc") return `<svg width="62" height="18" viewBox="0 0 70 20"><path d="M18 6 Q35 18 52 6" stroke="${color}" stroke-width="3" fill="none"/></svg>`;
+  if(type === "line")     return `<svg width="62" height="18" viewBox="0 0 70 20"><rect x="12" y="8" width="46" height="4" rx="2" fill="${color}"/></svg>`;
+  if(type === "triDown")  return `<svg width="62" height="18" viewBox="0 0 70 20"><path d="M35 16 L20 4 L50 4 Z" fill="${color}"/></svg>`;
+  if(type === "square")   return `<svg width="62" height="18" viewBox="0 0 70 20"><rect x="25" y="4" width="20" height="12" rx="3" fill="${color}"/></svg>`;
+  if(type === "dash")     return `<svg width="62" height="18" viewBox="0 0 70 20"><circle cx="20" cy="10" r="3" fill="${color}"/><circle cx="35" cy="10" r="3" fill="${color}"/><circle cx="50" cy="10" r="3" fill="${color}"/></svg>`;
   return "";
 }
+
+/* ---------- RENDER ---------- */
 
 function render(){
-  document.getElementById('pageLabel').innerText=(page+1)+" / "+total;
-  const dots=document.getElementById('dots');
-  dots.innerHTML="";
-  const maxDots = window.innerWidth < 600? 6 : total;
-  const start = window.innerWidth < 600? Math.max(0, Math.min(page-2, total-maxDots)) : 0;
-  const count = window.innerWidth < 600? maxDots : total;
-  for(let i=start;i<Math.min(total,start+count);i++){
-    const d=document.createElement('div');
-    const isCur=i===page;
-    d.style.width=isCur?'20px':'8px'; d.style.height='8px'; d.style.borderRadius='999px';
-    d.style.background=isCur?'#0f172a':'#fde68a'; d.style.transition='all.2s';
-    d.style.cursor='pointer'; d.onclick=()=>{page=i;active=null;render();};
+  document.getElementById('pageLabel').innerText = (page + 1) + " / " + total;
+
+  // Dots de navegación
+  const dots = document.getElementById('dots');
+  dots.innerHTML = "";
+  const esMovil = window.innerWidth < 600;
+  const maxDots = esMovil ? 6 : total;
+  const start = esMovil ? Math.max(0, Math.min(page - 2, total - maxDots)) : 0;
+  const count = esMovil ? maxDots : total;
+  for(let i = start; i < Math.min(total, start + count); i++){
+    const d = document.createElement('div');
+    const isCur = i === page;
+    d.style.cssText = `width:${isCur ? 20 : 8}px;height:8px;border-radius:999px;background:${isCur ? '#0f172a' : '#fde68a'};transition:all .2s;cursor:pointer`;
+    d.onclick = () => { page = i; active = null; render(); };
     dots.appendChild(d);
   }
 
-  document.getElementById('prev').disabled=page===0;
-  document.getElementById('next').disabled=page===total-1;
-  document.getElementById('next').innerHTML=page===total-1?"¡Listo! 🎉":"Siguiente →";
+  document.getElementById('prev').disabled = page === 0;
+  document.getElementById('next').disabled = page === total - 1;
+  document.getElementById('next').innerHTML = page === total - 1 ? "¡Listo! 🎉" : "Siguiente →";
 
-  const c=document.getElementById('content');
-  if(page===0){
-    c.innerHTML=`
+  const c = document.getElementById('content');
+
+  if(page === 0){
+    // PORTADA
+    c.innerHTML = `
       <div style="display:grid;place-items:center;flex:1;text-align:center;padding:20px 8px">
         <div style="width:100%;max-width:600px">
           <div style="display:inline-flex;padding:6px 14px;border-radius:999px;background:#fef3c7;font-size:11px;font-weight:800;letter-spacing:.08em">LECTURA FÁCIL • MÉTODO PROFESORA MANU</div>
@@ -193,8 +256,10 @@ function render(){
           <div class="patrick" style="margin-top:16px;font-size:14px;color:#94a3b8">Toca para escuchar • Desliza para avanzar →</div>
         </div>
       </div>`;
-  } else if(page===1){
-    c.innerHTML=`
+  }
+  else if(page === 1){
+    // INSTRUCCIONES
+    c.innerHTML = `
       <div style="max-width:800px;margin:0 auto;width:100%">
         <h2 style="font-size:clamp(24px,5vw,36px);font-weight:900">¿Cómo se usa? <span class="hand" style="color:#FF5A5F">Muy fácil</span></h2>
         <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -217,25 +282,32 @@ function render(){
           <div class="hand" style="font-size:36px">mapa</div>
         </div>
       </div>`;
-  } else if(page>=2 && page<=16){
-    const w=WORDS[page-2];
-    const cols = w.s.length>3? (window.innerWidth<400?2:w.s.length) : w.s.length;
-    let sylls=w.s.map((s,i)=>`
-      <div class="syl-card ${active===i?'active':''}" onclick="setActive(${i})" style="touch-action:manipulation">
-        <div>${topSvg(w.top[i%w.top.length], w.colors[i%w.colors.length], active===i)}</div>
+  }
+  else if(page >= 2 && page <= 16){
+    // PÁGINA DE PALABRA
+    const w = WORDS[page - 2];
+    const cols = w.s.length > 3 ? (window.innerWidth < 400 ? 2 : w.s.length) : w.s.length;
+
+    const sylls = w.s.map((s, i) => `
+      <div class="syl-card ${active === i ? 'active' : ''}" onclick="setActive(${i})" style="touch-action:manipulation">
+        <div>${topSvg(w.top[i % w.top.length], w.colors[i % w.colors.length], active === i)}</div>
         <div class="hand" style="font-size:clamp(22px,5vw,32px);margin:4px 0">${s} 🔊</div>
-        <div>${bottomSvg(w.bottom[i%w.bottom.length], w.colors[i%w.colors.length], active===i)}</div>
+        <div>${bottomSvg(w.bottom[i % w.bottom.length], w.colors[i % w.colors.length], active === i)}</div>
       </div>
     `).join('');
-    c.innerHTML=`
+
+    c.innerHTML = `
       <div class="two-col" style="width:100%;flex:1">
         <div style="display:flex;flex-direction:column;gap:12px">
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="font-size:10px;font-weight:800;letter-spacing:.1em;background:#fef3c7;padding:4px 10px;border-radius:999px">PALABRA ${page-1} DE 15</span><span class="patrick" style="color:#94a3b8;font-size:12px">${w.hint||'toca cada sílaba'}</span></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span style="font-size:10px;font-weight:800;letter-spacing:.1em;background:#fef3c7;padding:4px 10px;border-radius:999px">PALABRA ${page - 1} DE 15</span>
+            <span class="patrick" style="color:#94a3b8;font-size:12px">${w.hint || 'toca cada sílaba'}</span>
+          </div>
           <div class="syl-grid" style="grid-template-columns:repeat(${cols},1fr)">${sylls}</div>
           <div onclick="hablar('${w.full}')" style="cursor:pointer;background:#FFFBF0;border:2px solid #fde68a;border-radius:20px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
             <div style="font-size:10px;font-weight:800;letter-spacing:.1em">RESULTADO 🔊:</div>
             <div class="hand" style="font-size:clamp(28px,7vw,46px);line-height:1">${w.full}</div>
-            <div style="margin-left:auto;display:flex;gap:6px">${w.s.map((_,i)=>`<div style="width:10px;height:10px;border-radius:999px;background:${w.colors[i%w.colors.length]}"></div>`).join('')}</div>
+            <div style="margin-left:auto;display:flex;gap:6px">${w.s.map((_, i) => `<div style="width:10px;height:10px;border-radius:999px;background:${w.colors[i % w.colors.length]}"></div>`).join('')}</div>
           </div>
           <div class="patrick" style="font-size:12px;color:#64748b">👆 Toca cada sílaba para escuchar. Toca el resultado para escuchar la palabra completa.</div>
         </div>
@@ -243,53 +315,92 @@ function render(){
           <div>
             <div style="font-size:clamp(64px,18vw,110px);line-height:1">${w.emoji}</div>
             <div class="hand" style="font-size:clamp(28px,6vw,40px);margin-top:8px">${w.full}</div>
-            <div style="margin-top:12px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">${w.s.map(s=>`<span onclick="hablar('${s}')" style="cursor:pointer;padding:5px 10px;border-radius:999px;background:white;border:1px solid #fde68a;font-family:'Caveat';font-size:14px">${s} 🔊</span>`).join('')}</div>
+            <div style="margin-top:12px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">${w.s.map(s => `<span onclick="hablar('${s}')" style="cursor:pointer;padding:5px 10px;border-radius:999px;background:white;border:1px solid #fde68a;font-family:'Caveat';font-size:14px">${s} 🔊</span>`).join('')}</div>
           </div>
         </div>
       </div>`;
-      if(window.innerWidth<900){
-        c.querySelector('.two-col').style.display='flex';
-        c.querySelector('.two-col').style.flexDirection='column';
-      }
-  } else {
-    c.innerHTML=`
+
+    if(window.innerWidth < 900){
+      const tc = c.querySelector('.two-col');
+      tc.style.display = 'flex';
+      tc.style.flexDirection = 'column';
+    }
+  }
+  else {
+    // FRASES FINALES
+    c.innerHTML = `
       <div style="max-width:900px;margin:0 auto;width:100%">
         <h2 style="font-size:clamp(26px,6vw,38px);font-weight:900">¡Ahora <span class="hand" style="color:#FF5A5F">frases!</span> 🔊</h2>
         <div class="frases-grid" style="margin-top:16px">
           ${[
-            {t:"Yo amo a mamá", e:["👧","❤️","👩"], c:"#FF5A5F"},
-            {t:"El sol es caliente", e:["☀️","🔥","😎"], c:"#FF9A2E"},
-            {t:"La vaca hace muu", e:["🐄","💬","muu"], c:"#7ED957"},
-            {t:"Mi mapa es amarillo", e:["🗺️","💛","🎨"], c:"#FFD23F"},
-            {t:"El elefante toma limonada", e:["🐘","🥤","🍋"], c:"#4ECDC4"},
-            {t:"De noche veo la nube", e:["🌙","👀","☁️"], c:"#6BCBFF"},
-          ].map((f,i)=>`
+            {t:"Yo amo a mamá",                e:["👧","❤️","👩"], c:"#FF5A5F"},
+            {t:"El sol es caliente",           e:["☀️","🔥","😎"], c:"#FF9A2E"},
+            {t:"La vaca hace muu",             e:["🐄","💬","muu"], c:"#7ED957"},
+            {t:"Mi mapa es amarillo",          e:["🗺️","💛","🎨"], c:"#FFD23F"},
+            {t:"El elefante toma limonada",    e:["🐘","🥤","🍋"], c:"#4ECDC4"},
+            {t:"De noche veo la nube",         e:["🌙","👀","☁️"], c:"#6BCBFF"},
+          ].map((f, i) => `
             <div onclick="hablar('${f.t}')" style="cursor:pointer;background:white;border:1px solid #fde68a;border-radius:18px;padding:14px">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:4px;height:20px;border-radius:999px;background:${f.c}"></div><div style="font-size:10px;font-weight:800;letter-spacing:.1em">FRASE ${i+1} 🔊</div></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                <div style="width:4px;height:20px;border-radius:999px;background:${f.c}"></div>
+                <div style="font-size:10px;font-weight:800;letter-spacing:.1em">FRASE ${i + 1} 🔊</div>
+              </div>
               <div class="hand" style="font-size:clamp(20px,4vw,24px)">"${f.t}"</div>
-              <div style="margin-top:10px;display:flex;gap:6px">${f.e.map(em=>`<div style="width:40px;height:40px;border-radius:10px;background:#FFFBF0;border:1px solid #fde68a;display:grid;place-items:center;font-size:18px">${em}</div>`).join('')}</div>
+              <div style="margin-top:10px;display:flex;gap:6px">${f.e.map(em => `<div style="width:40px;height:40px;border-radius:10px;background:#FFFBF0;border:1px solid #fde68a;display:grid;place-items:center;font-size:18px">${em}</div>`).join('')}</div>
             </div>
           `).join('')}
         </div>
       </div>`;
   }
 }
+
+/* ---------- INTERACCIÓN ---------- */
+
 function setActive(i){
-  active=i;
+  active = i;
   render();
   if(navigator.vibrate) navigator.vibrate(10);
-  const w = WORDS[page-2];
+  const w = WORDS[page - 2];
   if(w) hablar(w.s[i]);
 }
-function go(d){ page=Math.max(0,Math.min(total-1,page+d)); active=null; render(); window.scrollTo({top:0,behavior:'smooth'}); if(page>=2 && page<=16){ setTimeout(()=>hablar(WORDS[page-2].full), 300); } }
-let touchStartX=0;
-document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
-document.addEventListener('touchend',e=>{
-  const diff=e.changedTouches[0].screenX-touchStartX;
-  if(Math.abs(diff)>60){ if(diff<0) go(1); else go(-1); }
-},{passive:true});
-document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(1); if(e.key==='ArrowLeft') go(-1); });
-window.addEventListener('resize',()=>{ render(); });
+
+function go(d){
+  page = Math.max(0, Math.min(total - 1, page + d));
+  active = null;
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(page >= 2 && page <= 16){
+    setTimeout(() => hablar(WORDS[page - 2].full), 320);
+  }
+}
+
+// Swipe táctil
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].screenX - touchStartX;
+  if(Math.abs(diff) > 60) (diff < 0) ? go(1) : go(-1);
+}, {passive:true});
+
+// Teclado
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight') go(1);
+  if(e.key === 'ArrowLeft')  go(-1);
+});
+
+// Resize con debounce
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(render, 150);
+});
+
+// Desbloqueo de voces en primer toque (necesario en iOS/Chrome móvil)
+document.addEventListener('click', function desbloquear(){
+  cargarVoces();
+  document.removeEventListener('click', desbloquear);
+}, {once:true});
+
 render();
 </script>
 </body>
