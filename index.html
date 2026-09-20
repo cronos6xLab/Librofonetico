@@ -6,23 +6,24 @@
 <title>Mi Libro Fonético - Grafismos con Sonido</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;paddingyl:0;-webkit-tap-highlight-color:transparent}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html{font-size:16px}
-  body{font-family:'Nunito',sans-serif;background:#FFFBF0;color:#1e293b;min-height:100vh;min-height:100dvh;overflow-x:hidden}
+  body{font-family:'Nunito',sans-serif;background:#FFFBF0;color:#1e293b;min-height:100vh;min-height:100dvh;overflow-x:hidden;display:flex;flex-direction:column}
   .hand{font-family:'Caveat',cursive}
   .patrick{font-family:'Patrick Hand',cursive}
   .topbar{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-  .topbar-left-grid{display:flex;align-items:{center;gap:10px}
-  .logo{width:display36px;height:36px;min-width:36px:;border-radius:10px;background:#0fgrid172a;display:grid;place-items:center;color:white;font-weight:900;font-size:14px}
-  .book{max-width:1100px;margin:8px auto 20px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #fde68a;width:calc(100% - 16px)}
+  .topbar-left{display:flex;align-items:center;gap:10px}
+  .logo{width:36px;height:36px;min-width:36px;border-radius:10px;background:#0f172a;display:grid;place-items:center;color:white;font-weight:900;font-size:14px}
+  .book{max-width:1100px;margin:8px auto 20px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #fde68a;width:calc(100% - 16px);box-sizing:border-box}
   @media(min-width:768px){.book{border-radius:32px;width:calc(100% - 32px);margin:12px auto 24px}}
-  .page{min-height:calc(100dvh - 140px);padding:16px;display:flex;flex-direction:column}
+  /* Respaldo de altura para navegadores sin dvh */
+  .page{min-height:calc(100vh - 140px);min-height:calc(100dvh - 140px);padding:16px;display:flex;flex-direction:column;flex:1}
   @media(min-width:768px){.page{min-height:620px;padding:24px}}
   .syl-card{cursor:pointer;transition:.15s;background:white;border:2px solid #fef3c7;border-radius:16px;padding:10px 6px;text-align:center;user-select:none}
   @media(min-width:768px){.syl-card{border-radius:24px;padding:12px 8px}}
   .syl-card:active{transform:scale(.96)}
   .syl-card.active{border-color:#0f172a;background:#fffbeb;transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,.12)}
-  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-top:1px solid #fde68a;background:white;gap:8px;position:sticky;bottom:0;z-index:10}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-top:1px solid #fde68a;background:white;gap:8px;position:sticky;bottom:0;z-index:10;flex-wrap:wrap}
   @media(min-width:768px){.nav{padding:16px 24px}}
   .btn{height:44px;padding:0 18px;border-radius:999px;border:1px solid #fde68a;font-weight:900;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;background:white;white-space:nowrap;flex-shrink:0}
   @media(min-width:768px){.btn{height:48px;padding:0 24px}}
@@ -31,7 +32,7 @@
   .btn:active{transform:scale(.97)}
   .two-col{display:grid;grid-template-columns:1fr;gap:16px}
   @media(min-width:900px){.two-col{grid-template-columns:1.25fr .75fr;gap:24px}}
-  .s;gap:10px}
+  .syl-grid{display:grid;gap:10px}
   .emoji-box{background:#FFFBF0;border:1px solid #fde68a;border-radius:20px;padding:16px;text-align:center;display:grid;place-items:center}
   @media(min-width:900px){.emoji-box{border-radius:32px;padding:20px;min-height:380px}}
   .frases-grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -60,10 +61,15 @@
 </div>
 
 <div class="book">
-  <div id="content" class="page"></div>
+  <!-- Mensaje mientras carga, se reemplaza con render() -->
+  <div id="content" class="page">
+    <div style="display:flex;justify-content:center;align-items:center;height:100%;color:#94a3b8;font-family:sans-serif;">
+      Cargando libro...
+    </div>
+  </div>
   <div class="nav">
     <button id="prev" class="btn" onclick="go(-1)"><span>←</span><span> Anterior</span></button>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow:hidden" id="dots"></div>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;flex:1;justify-content:center;padding:0 4px" id="dots"></div>
     <button id="next" class="btn btn-black" onclick="go(1)">Siguiente →</button>
   </div>
 </div>
@@ -96,25 +102,27 @@ let active = null;
 const total = 18;
 let vozActiva = true;
 
-const synth = window.speechSynthesis;
+const synth = window.speechSynthesis || null;
 let voces = [];
 let vozElegida = null;
 
 /* ---------- SELECCIÓN DE VOZ NATURAL ---------- */
-
 function cargarVoces(){
   if(!synth) return;
-  voces = synth.getVoices() || [];
-  if(voces.length && !vozElegida){
-    vozElegida = elegirMejorVoz(voces);
+  // ¡IMPORTANTE! Envueltos en try-catch para que un error del navegador NO rompa la app.
+  try {
+    voces = synth.getVoices() || [];
+    if(voces.length && !vozElegida){
+      vozElegida = elegirMejorVoz(voces);
+    }
+  } catch(e) {
+    console.warn('Aviso: no se pudieron cargar las voces:', e);
   }
 }
 
 function elegirMejorVoz(lista){
   const es = lista.filter(v => v.lang && v.lang.toLowerCase().startsWith('es'));
   if(!es.length) return null;
-
-  // Prioridades: voces neuronales / naturales primero
   const prioridades = [
     v => /google/i.test(v.name) && /es[-_]?mx/i.test(v.lang),
     v => /google/i.test(v.name) && /es[-_]?us/i.test(v.lang),
@@ -133,44 +141,22 @@ function elegirMejorVoz(lista){
   return es[0];
 }
 
-if(synth){
-  cargarVoces();
-  if('onvoiceschanged' in synth){
-    synth.onvoiceschanged = cargarVoces;
-  }
-  // Fallback: en iOS/Android las voces a veces tardan
-  setTimeout(cargarVoces, 300);
-  setTimeout(cargarVoces, 1200);
-}
-
-/* ---------- HABLAR CON VOZ NATURAL ---------- */
-
+/* ---------- HABLAR ---------- */
 function hablar(texto, opciones = {}){
   if(!vozActiva || !synth || !texto) return;
-
-  // En móvil las voces pueden no estar listas aún
   if(!voces.length) cargarVoces();
   if(!vozElegida && voces.length) vozElegida = elegirMejorVoz(voces);
-
   try { synth.cancel(); } catch(_) {}
-
-  const u = new SpeechSynthesisUtter '';
-ance(texto);
+  const u = new SpeechSynthesisUtterance(texto);
   if(vozElegida) u.voice = vozElegida;
   u.lang = (vozElegida && vozElegida.lang) || 'es-MX';
-
-  // Ajustes más naturales:
-  // - rate 0.9 = claro pero no robótico
-  // - pitch 1.0 = voz natural sin exagerar
   u.rate   = opciones.rate   ?? 0.9;
   u.pitch  = opciones.pitch  ?? 1.0;
   u.volume = opciones.volume ?? 1;
-
-  synth.speak(u);
+  try { synth.speak(u); } catch(_) {}
 }
 
 /* ---------- SONIDO ON/OFF ---------- */
-
 function toggleSonido(){
   vozActiva = !vozActiva;
   const btn = document.getElementById('soundBtn');
@@ -178,7 +164,6 @@ function toggleSonido(){
   btn.style.background = vozActiva ? '#0f172a' : 'white';
   btn.style.color = vozActiva ? 'white' : '#0f172a';
   if(vozActiva){
-    // Aprovechamos el gesto del usuario para desbloquear voces en móvil
     cargarVoces();
     hablar('Sonido activado');
   } else if(synth){
@@ -186,11 +171,11 @@ function toggleSonido(){
   }
 }
 
-/* ---------- SVG  DE GRAFISMOS ---------- */
-
+/* ---------- DIBUJOS ---------- */
 function topSvg(type, color, act){
   const sw = act ? 5 : 3.2;
-  const glow = act ? ` style="filter:drop-shadow(0 0 6px ${color})"` : if(type === "arc")      return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 20 Q35 -2 64 20" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
+  const glow = act ? ` style="filter:drop-shadow(0 0 6px ${color})"` : '';
+  if(type === "arc")      return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 20 Q35 -2 64 20" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
   if(type === "triangle") return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M35 2 L60 20 L10 20 Z" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
   if(type === "rect")     return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><rect x="8" y="6" width="54" height="12" rx="6" stroke="${color}" stroke-width="${sw}" fill="none"/></svg>`;
   if(type === "wave")     return `<svg width="62" height="22" viewBox="0 0 70 26"${glow}><path d="M6 14 Q18 4 30 14 T54 14" stroke="${color}" stroke-width="${sw}" fill="none" stroke-linecap="round"/></svg>`;
@@ -211,33 +196,38 @@ function bottomSvg(type, color, act){
 }
 
 /* ---------- RENDER ---------- */
-
 function render(){
-  document.getElementById('pageLabel').innerText = (page + 1) + " / " + total;
+  const pageLabel = document.getElementById('pageLabel');
+  if(pageLabel) pageLabel.innerText = (page + 1) + " / " + total;
 
-  // Dots de navegación
   const dots = document.getElementById('dots');
-  dots.innerHTML = "";
-  const esMovil = window.innerWidth < 600;
-  const maxDots = esMovil ? 6 : total;
-  const start = esMovil ? Math.max(0, Math.min(page - 2, total - maxDots)) : 0;
-  const count = esMovil ? maxDots : total;
-  for(let i = start; i < Math.min(total, start + count); i++){
-    const d = document.createElement('div');
-    const isCur = i === page;
-    d.style.cssText = `width:${isCur ? 20 : 8}px;height:8px;border-radius:999px;background:${isCur ? '#0f172a' : '#fde68a'};transition:all .2s;cursor:pointer`;
-    d.onclick = () => { page = i; active = null; render(); };
-    dots.appendChild(d);
+  if(dots){
+    dots.innerHTML = "";
+    const esMovil = window.innerWidth < 600;
+    const maxDots = esMovil ? 6 : total;
+    const start = esMovil ? Math.max(0, Math.min(page - 2, total - maxDots)) : 0;
+    const count = esMovil ? maxDots : total;
+    for(let i = start; i < Math.min(total, start + count); i++){
+      const d = document.createElement('div');
+      const isCur = i === page;
+      d.style.cssText = `width:${isCur ? 20 : 8}px;height:8px;border-radius:999px;background:${isCur ? '#0f172a' : '#fde68a'};transition:all .2s;cursor:pointer;flex-shrink:0`;
+      d.onclick = () => { page = i; active = null; render(); };
+      dots.appendChild(d);
+    }
   }
 
-  document.getElementById('prev').disabled = page === 0;
-  document.getElementById('next').disabled = page === total - 1;
-  document.getElementById('next').innerHTML = page === total - 1 ? "¡Listo! 🎉" : "Siguiente →";
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  if(prevBtn) prevBtn.disabled = page === 0;
+  if(nextBtn){
+    nextBtn.disabled = page === total - 1;
+    nextBtn.innerHTML = page === total - 1 ? "¡Listo! 🎉" : "Siguiente →";
+  }
 
   const c = document.getElementById('content');
+  if(!c) return;
 
   if(page === 0){
-    // PORTADA
     c.innerHTML = `
       <div style="display:grid;place-items:center;flex:1;text-align:center;padding:20px 8px">
         <div style="width:100%;max-width:600px">
@@ -258,7 +248,6 @@ function render(){
       </div>`;
   }
   else if(page === 1){
-    // INSTRUCCIONES
     c.innerHTML = `
       <div style="max-width:800px;margin:0 auto;width:100%">
         <h2 style="font-size:clamp(24px,5vw,36px);font-weight:900">¿Cómo se usa? <span class="hand" style="color:#FF5A5F">Muy fácil</span></h2>
@@ -284,10 +273,8 @@ function render(){
       </div>`;
   }
   else if(page >= 2 && page <= 16){
-    // PÁGINA DE PALABRA
     const w = WORDS[page - 2];
     const cols = w.s.length > 3 ? (window.innerWidth < 400 ? 2 : w.s.length) : w.s.length;
-
     const sylls = w.s.map((s, i) => `
       <div class="syl-card ${active === i ? 'active' : ''}" onclick="setActive(${i})" style="touch-action:manipulation">
         <div>${topSvg(w.top[i % w.top.length], w.colors[i % w.colors.length], active === i)}</div>
@@ -295,7 +282,6 @@ function render(){
         <div>${bottomSvg(w.bottom[i % w.bottom.length], w.colors[i % w.colors.length], active === i)}</div>
       </div>
     `).join('');
-
     c.innerHTML = `
       <div class="two-col" style="width:100%;flex:1">
         <div style="display:flex;flex-direction:column;gap:12px">
@@ -319,15 +305,12 @@ function render(){
           </div>
         </div>
       </div>`;
-
     if(window.innerWidth < 900){
       const tc = c.querySelector('.two-col');
-      tc.style.display = 'flex';
-      tc.style.flexDirection = 'column';
+      if(tc){ tc.style.display = 'flex'; tc.style.flexDirection = 'column'; }
     }
   }
   else {
-    // FRASES FINALES
     c.innerHTML = `
       <div style="max-width:900px;margin:0 auto;width:100%">
         <h2 style="font-size:clamp(26px,6vw,38px);font-weight:900">¡Ahora <span class="hand" style="color:#FF5A5F">frases!</span> 🔊</h2>
@@ -355,7 +338,6 @@ function render(){
 }
 
 /* ---------- INTERACCIÓN ---------- */
-
 function setActive(i){
   active = i;
   render();
@@ -374,7 +356,7 @@ function go(d){
   }
 }
 
-// Swipe táctil
+/* ---------- EVENTOS ---------- */
 let touchStartX = 0;
 document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
 document.addEventListener('touchend', e => {
@@ -382,26 +364,50 @@ document.addEventListener('touchend', e => {
   if(Math.abs(diff) > 60) (diff < 0) ? go(1) : go(-1);
 }, {passive:true});
 
-// Teclado
 document.addEventListener('keydown', e => {
   if(e.key === 'ArrowRight') go(1);
   if(e.key === 'ArrowLeft')  go(-1);
 });
 
-// Resize con debounce
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(render, 150);
 });
 
-// Desbloqueo de voces en primer toque (necesario en iOS/Chrome móvil)
+/* ---------- INICIALIZACIÓN BLINDADA ---------- */
 document.addEventListener('click', function desbloquear(){
   cargarVoces();
   document.removeEventListener('click', desbloquear);
 }, {once:true});
 
-render();
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Inicializar voces con protección
+  if(synth){
+    try {
+      cargarVoces();
+      if('onvoiceschanged' in synth) synth.onvoiceschanged = cargarVoces;
+      setTimeout(cargarVoces, 300);
+      setTimeout(cargarVoces, 1200);
+    } catch(e) { console.warn('Error al iniciar voces:', e); }
+  }
+
+  // 2) Renderizar con protección
+  try {
+    render();
+  } catch(e) {
+    console.error('Error en render:', e);
+    const content = document.getElementById('content');
+    if(content){
+      content.innerHTML = `
+        <div style="padding:24px;text-align:center;font-family:sans-serif">
+          <h2 style="color:#FF5A5F">Oops, algo salió mal 😅</h2>
+          <p style="font-size:14px;color:#64748b;margin-top:8px">${e.message}</p>
+          <button onclick="location.reload()" style="margin-top:16px;padding:10px 20px;border-radius:999px;background:#0f172a;color:white;border:none;font-weight:bold">Reintentar</button>
+        </div>`;
+    }
+  }
+});
 </script>
 </body>
 </html>
