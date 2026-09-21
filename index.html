@@ -16,7 +16,6 @@
   .logo{width:36px;height:36px;min-width:36px;border-radius:10px;background:#0f172a;display:grid;place-items:center;color:white;font-weight:900;font-size:14px}
   .book{max-width:1100px;margin:8px auto 20px;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #fde68a;width:calc(100% - 16px);box-sizing:border-box}
   @media(min-width:768px){.book{border-radius:32px;width:calc(100% - 32px);margin:12px auto 24px}}
-  /* Respaldo de altura para navegadores sin dvh */
   .page{min-height:calc(100vh - 140px);min-height:calc(100dvh - 140px);padding:16px;display:flex;flex-direction:column;flex:1}
   @media(min-width:768px){.page{min-height:620px;padding:24px}}
   .syl-card{cursor:pointer;transition:.15s;background:white;border:2px solid #fef3c7;border-radius:16px;padding:10px 6px;text-align:center;user-select:none}
@@ -56,12 +55,11 @@
   </div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
     <button id="soundBtn" onclick="toggleSonido()" style="height:32px;padding:0 14px;border-radius:999px;border:1px solid #0f172a;background:#0f172a;color:white;font-weight:800;font-size:12px;cursor:pointer">🔊 Sonido ON</button>
-    <div class="patrick" style="font-size:12px;color:#94a3b8;background:white;padding:6px 12px;border-radius:999px;border:1px solid #fde68a"><span id="pageLabel">1 / 18</span></div>
+    <div class="patrick" style="font-size:12px;color:#94a3b8;background:white;padding:6px 12px;border-radius:999px;border:1px solid #fde68a"><span id="pageLabel">1 / 36</span></div>
   </div>
 </div>
 
 <div class="book">
-  <!-- Mensaje mientras carga, se reemplaza con render() -->
   <div id="content" class="page">
     <div style="display:flex;justify-content:center;align-items:center;height:100%;color:#94a3b8;font-family:sans-serif;">
       Cargando libro...
@@ -79,7 +77,11 @@
 </div>
 
 <script>
+/* =========================================================
+   BANCO DE PALABRAS  (15 originales + 18 nuevas = 33)
+   ========================================================= */
 const WORDS = [
+  /* --- BLOQUE 1: palabras originales --- */
   {s:["ma","pa"], full:"mapa", emoji:"🗺️", colors:["#FF5A5F","#FF9A2E"], top:["arc","triangle"], bottom:["dot","dot"], hint:"busco lugares"},
   {s:["bi","ci","cle","ta"], full:"bicicleta", emoji:"🚲", colors:["#FF5A5F","#FF9A2E","#FFD23F","#4ECDC4"], top:["arc","triangle","rect","wave"], bottom:["dot","smallArc","line","dot"]},
   {s:["a","ma","ri","llo"], full:"amarillo", emoji:"💛", colors:["#FF5A5F","#FF9A2E","#FFD23F","#4ECDC4"], top:["bump","arc","triangle","rect"], bottom:["dot","dot","smallArc","line"]},
@@ -95,11 +97,42 @@ const WORDS = [
   {s:["o","ve","ja"], full:"oveja", emoji:"🐑", colors:["#e2e8f0","#7ED957","#FFD23F"], top:["rect","wave","arc"], bottom:["dash","dot","dot"]},
   {s:["man","za","na"], full:"manzana", emoji:"🍎", colors:["#FF5A5F","#FFD23F","#7ED957"], top:["arc","double","triangle"], bottom:["dot","smallArc","dot"]},
   {s:["no","che","nu","be"], full:"noche nube", emoji:"🌙", colors:["#6BCBFF","#A78BFA","#4ECDC4","#CBD5E1"], top:["double","arc","wave","bump"], bottom:["square","dot","line","dot"]},
+
+  /* --- BLOQUE 2: 18 palabras nuevas --- */
+  {s:["pe","lo","ta"], full:"pelota", emoji:"⚽", colors:["#FF5A5F","#FFD23F","#4ECDC4"], top:["arc","triangle","wave"], bottom:["dot","smallArc","line"], hint:"para jugar"},
+  {s:["ga","to"], full:"gato", emoji:"🐱", colors:["#FF9A2E","#7ED957"], top:["wave","arc"], bottom:["dot","dot"], hint:"dice miau"},
+  {s:["ma","ri","po","sa"], full:"mariposa", emoji:"🦋", colors:["#FF5A5F","#A78BFA","#FFD23F","#6BCBFF"], top:["double","arc","wave","triangle"], bottom:["square","dot","line","dot"], hint:"vuela bonito"},
+  {s:["tor","tu","ga"], full:"tortuga", emoji:"🐢", colors:["#7ED957","#4ECDC4","#FFD23F"], top:["bump","arc","triangle"], bottom:["smallArc","dot","square"], hint:"camina lento"},
+  {s:["pa","to"], full:"pato", emoji:"🦆", colors:["#FFD23F","#6BCBFF"], top:["arc","wave"], bottom:["dot","smallArc"], hint:"dice cuac"},
+  {s:["fo","ca"], full:"foca", emoji:"🦭", colors:["#6BCBFF","#A78BFA"], top:["wave","bump"], bottom:["line","dot"], hint:"vive en el mar"},
+  {s:["plá","ta","no"], full:"plátano", emoji:"🍌", colors:["#FFD23F","#FF9A2E","#7ED957"], top:["arc","triangle","double"], bottom:["dot","smallArc","dot"], hint:"fruta amarilla"},
+  {s:["to","ma","te"], full:"tomate", emoji:"🍅", colors:["#FF5A5F","#FF9A2E","#7ED957"], top:["bump","arc","wave"], bottom:["dot","dot","line"], hint:"fruta roja"},
+  {s:["he","la","do"], full:"helado", emoji:"🍦", colors:["#6BCBFF","#FFD23F","#FF5A5F"], top:["triangle","arc","bump"], bottom:["triDown","dot","smallArc"], hint:"frío y rico"},
+  {s:["ga","lle","ta"], full:"galleta", emoji:"🍪", colors:["#D4A373","#FF9A2E","#FFD23F"], top:["rect","arc","wave"], bottom:["line","dot","dash"], hint:"para mojar"},
+  {s:["a","be","ja"], full:"abeja", emoji:"🐝", colors:["#FFD23F","#0f172a","#FF9A2E"], top:["wave","arc","bump"], bottom:["dot","line","dot"], hint:"hace miel"},
+  {s:["es","tre","lla"], full:"estrella", emoji:"⭐", colors:["#FFD23F","#FF5A5F","#FF9A2E"], top:["triangle","arc","wave"], bottom:["triDown","dot","dot"], hint:"brilla de noche"},
+  {s:["cho","co","la","te"], full:"chocolate", emoji:"🍫", colors:["#D4A373","#0f172a","#FF9A2E","#FFD23F"], top:["rect","arc","bump","triangle"], bottom:["line","dot","smallArc","dot"], hint:"dulce de cacao"},
+  {s:["san","dí","a"], full:"sandía", emoji:"🍉", colors:["#FF5A5F","#7ED957","#0f172a"], top:["arc","bump","triangle"], bottom:["dot","dot","triDown"], hint:"fruta de verano"},
+  {s:["za","pa","tos"], full:"zapatos", emoji:"👟", colors:["#FF5A5F","#4ECDC4","#FFD23F"], top:["double","arc","rect"], bottom:["square","dot","line"], hint:"para caminar"},
+  {s:["re","ga","lo"], full:"regalo", emoji:"🎁", colors:["#FF5A5F","#FFD23F","#4ECDC4"], top:["rect","arc","bump"], bottom:["line","dot","smallArc"], hint:"con moño"},
+  {s:["glo","bo"], full:"globo", emoji:"🎈", colors:["#FF5A5F","#A78BFA"], top:["bump","arc"], bottom:["dot","triDown"], hint:"vuela al cielo"},
+  {s:["co","ne","jo"], full:"conejo", emoji:"🐰", colors:["#e2e8f0","#FF9A2E","#7ED957"], top:["rect","arc","wave"], bottom:["dot","dot","line"], hint:"salta y come zanahoria"},
 ];
+
+/* =========================================================
+   ESTRUCTURA DINÁMICA DE PÁGINAS
+   ---------------------------------------------------------
+   Página 0 ................ Portada
+   Página 1 ................ Instrucciones
+   Páginas 2..N+1 .......... Palabras (N = WORDS.length)
+   Página N+2 = total - 1 .. Frases
+   ========================================================= */
+const TOTAL = WORDS.length + 3;   // portada + instrucciones + palabras + frases
+const PALABRAS_INICIO = 2;
+const PALABRAS_FIN    = WORDS.length + 1;
 
 let page = 0;
 let active = null;
-const total = 18;
 let vozActiva = true;
 
 const synth = window.speechSynthesis || null;
@@ -109,7 +142,6 @@ let vozElegida = null;
 /* ---------- SELECCIÓN DE VOZ NATURAL ---------- */
 function cargarVoces(){
   if(!synth) return;
-  // ¡IMPORTANTE! Envueltos en try-catch para que un error del navegador NO rompa la app.
   try {
     voces = synth.getVoices() || [];
     if(voces.length && !vozElegida){
@@ -198,16 +230,16 @@ function bottomSvg(type, color, act){
 /* ---------- RENDER ---------- */
 function render(){
   const pageLabel = document.getElementById('pageLabel');
-  if(pageLabel) pageLabel.innerText = (page + 1) + " / " + total;
+  if(pageLabel) pageLabel.innerText = (page + 1) + " / " + TOTAL;
 
   const dots = document.getElementById('dots');
   if(dots){
     dots.innerHTML = "";
     const esMovil = window.innerWidth < 600;
-    const maxDots = esMovil ? 6 : total;
-    const start = esMovil ? Math.max(0, Math.min(page - 2, total - maxDots)) : 0;
-    const count = esMovil ? maxDots : total;
-    for(let i = start; i < Math.min(total, start + count); i++){
+    const maxDots = esMovil ? 6 : TOTAL;
+    const start = esMovil ? Math.max(0, Math.min(page - 2, TOTAL - maxDots)) : 0;
+    const count = esMovil ? maxDots : TOTAL;
+    for(let i = start; i < Math.min(TOTAL, start + count); i++){
       const d = document.createElement('div');
       const isCur = i === page;
       d.style.cssText = `width:${isCur ? 20 : 8}px;height:8px;border-radius:999px;background:${isCur ? '#0f172a' : '#fde68a'};transition:all .2s;cursor:pointer;flex-shrink:0`;
@@ -220,13 +252,14 @@ function render(){
   const nextBtn = document.getElementById('next');
   if(prevBtn) prevBtn.disabled = page === 0;
   if(nextBtn){
-    nextBtn.disabled = page === total - 1;
-    nextBtn.innerHTML = page === total - 1 ? "¡Listo! 🎉" : "Siguiente →";
+    nextBtn.disabled = page === TOTAL - 1;
+    nextBtn.innerHTML = page === TOTAL - 1 ? "¡Listo! 🎉" : "Siguiente →";
   }
 
   const c = document.getElementById('content');
   if(!c) return;
 
+  /* ---------- PORTADA ---------- */
   if(page === 0){
     c.innerHTML = `
       <div style="display:grid;place-items:center;flex:1;text-align:center;padding:20px 8px">
@@ -247,6 +280,7 @@ function render(){
         </div>
       </div>`;
   }
+  /* ---------- INSTRUCCIONES ---------- */
   else if(page === 1){
     c.innerHTML = `
       <div style="max-width:800px;margin:0 auto;width:100%">
@@ -272,8 +306,10 @@ function render(){
         </div>
       </div>`;
   }
-  else if(page >= 2 && page <= 16){
-    const w = WORDS[page - 2];
+  /* ---------- PÁGINAS DE PALABRA ---------- */
+  else if(page >= PALABRAS_INICIO && page <= PALABRAS_FIN){
+    const idx = page - PALABRAS_INICIO;
+    const w = WORDS[idx];
     const cols = w.s.length > 3 ? (window.innerWidth < 400 ? 2 : w.s.length) : w.s.length;
     const sylls = w.s.map((s, i) => `
       <div class="syl-card ${active === i ? 'active' : ''}" onclick="setActive(${i})" style="touch-action:manipulation">
@@ -286,7 +322,7 @@ function render(){
       <div class="two-col" style="width:100%;flex:1">
         <div style="display:flex;flex-direction:column;gap:12px">
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <span style="font-size:10px;font-weight:800;letter-spacing:.1em;background:#fef3c7;padding:4px 10px;border-radius:999px">PALABRA ${page - 1} DE 15</span>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.1em;background:#fef3c7;padding:4px 10px;border-radius:999px">PALABRA ${idx + 1} DE ${WORDS.length}</span>
             <span class="patrick" style="color:#94a3b8;font-size:12px">${w.hint || 'toca cada sílaba'}</span>
           </div>
           <div class="syl-grid" style="grid-template-columns:repeat(${cols},1fr)">${sylls}</div>
@@ -310,6 +346,7 @@ function render(){
       if(tc){ tc.style.display = 'flex'; tc.style.flexDirection = 'column'; }
     }
   }
+  /* ---------- FRASES FINALES ---------- */
   else {
     c.innerHTML = `
       <div style="max-width:900px;margin:0 auto;width:100%">
@@ -322,6 +359,12 @@ function render(){
             {t:"Mi mapa es amarillo",          e:["🗺️","💛","🎨"], c:"#FFD23F"},
             {t:"El elefante toma limonada",    e:["🐘","🥤","🍋"], c:"#4ECDC4"},
             {t:"De noche veo la nube",         e:["🌙","👀","☁️"], c:"#6BCBFF"},
+            {t:"El gato come galleta",         e:["🐱","🍪","😋"], c:"#FF9A2E"},
+            {t:"La mariposa es bonita",        e:["🦋","✨","🌸"], c:"#A78BFA"},
+            {t:"Mi pelota es roja",            e:["⚽","🔴","🎯"], c:"#FF5A5F"},
+            {t:"El pato dice cuac",            e:["🦆","💬","🌊"], c:"#FFD23F"},
+            {t:"Como helado de chocolate",     e:["🍦","🍫","😋"], c:"#D4A373"},
+            {t:"La estrella brilla mucho",     e:["⭐","✨","🌌"], c:"#FFD23F"},
           ].map((f, i) => `
             <div onclick="hablar('${f.t}')" style="cursor:pointer;background:white;border:1px solid #fde68a;border-radius:18px;padding:14px">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
@@ -342,17 +385,17 @@ function setActive(i){
   active = i;
   render();
   if(navigator.vibrate) navigator.vibrate(10);
-  const w = WORDS[page - 2];
+  const w = WORDS[page - PALABRAS_INICIO];
   if(w) hablar(w.s[i]);
 }
 
 function go(d){
-  page = Math.max(0, Math.min(total - 1, page + d));
+  page = Math.max(0, Math.min(TOTAL - 1, page + d));
   active = null;
   render();
   window.scrollTo({top:0, behavior:'smooth'});
-  if(page >= 2 && page <= 16){
-    setTimeout(() => hablar(WORDS[page - 2].full), 320);
+  if(page >= PALABRAS_INICIO && page <= PALABRAS_FIN){
+    setTimeout(() => hablar(WORDS[page - PALABRAS_INICIO].full), 320);
   }
 }
 
@@ -382,7 +425,6 @@ document.addEventListener('click', function desbloquear(){
 }, {once:true});
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1) Inicializar voces con protección
   if(synth){
     try {
       cargarVoces();
@@ -392,7 +434,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(e) { console.warn('Error al iniciar voces:', e); }
   }
 
-  // 2) Renderizar con protección
   try {
     render();
   } catch(e) {
